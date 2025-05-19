@@ -18,6 +18,7 @@ import { appSt } from "./style.css";
 import { Gap } from "@alfalab/core-components/gap";
 import { useState } from "react";
 import { ThxLayout } from "./thx/ThxLayout.tsx";
+import { sendDataToGA } from "./utils/events.ts";
 
 interface Product {
   title: string;
@@ -86,10 +87,32 @@ export const App = () => {
   const [isNextStep, setIsNextStep] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const submit = () => {
+  const connect = () => {
+    window.gtag("event", "5247_get_sub", {
+      variant_name: "5247_4",
+    });
+  };
+
+  const submit1 = () => {
     setLoading(true);
 
-    Promise.resolve().then(() => {
+    sendDataToGA({
+      type: "Личная",
+      price: "399",
+    }).then(() => {
+      setLoading(false);
+      setThxShow(true);
+      LS.setItem(LSKeys.ShowThx, true);
+    });
+  };
+
+  const submit2 = () => {
+    setLoading(true);
+
+    sendDataToGA({
+      type: "Семейная + 2 участника",
+      price: "699",
+    }).then(() => {
       setLoading(false);
       setThxShow(true);
       LS.setItem(LSKeys.ShowThx, true);
@@ -194,7 +217,12 @@ export const App = () => {
         <Gap size={72} />
 
         <div className={appSt.bottomBtn}>
-          <ButtonMobile block view="primary" loading={loading} onClick={submit}>
+          <ButtonMobile
+            block
+            view="primary"
+            loading={loading}
+            onClick={submit2}
+          >
             Подключить семейную
           </ButtonMobile>
           <Gap size={16} />
@@ -202,7 +230,7 @@ export const App = () => {
             block
             view="secondary"
             loading={loading}
-            onClick={submit}
+            onClick={submit1}
           >
             Оставить только личную
           </ButtonMobile>
@@ -321,7 +349,14 @@ export const App = () => {
       <Gap size={72} />
 
       <div className={appSt.bottomBtn}>
-        <ButtonMobile block view="primary" onClick={() => setIsNextStep(true)}>
+        <ButtonMobile
+          block
+          view="primary"
+          onClick={() => {
+            setIsNextStep(true);
+            connect();
+          }}
+        >
           Подключить
         </ButtonMobile>
       </div>
