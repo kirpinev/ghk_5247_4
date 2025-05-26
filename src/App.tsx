@@ -166,7 +166,7 @@ export const App = () => {
           <Gap size={16} />
           <div
             style={{
-              border: "1px solid #dff8e5",
+              border: "1px solid #F2F3F5",
               borderRadius: "1.5rem",
               padding: "1rem",
               display: "flex",
@@ -177,7 +177,7 @@ export const App = () => {
             <div>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <Typography.Text view="primary-medium" weight="bold">
-                  Семейная
+                  Семейная подписка
                 </Typography.Text>
 
                 <div
@@ -208,6 +208,10 @@ export const App = () => {
                   <Typography.Text view="primary-medium" color="secondary">
                     Дальше — 699 ₽ в месяц
                   </Typography.Text>
+                  <Gap size={8} />
+                  <Typography.Text view="primary-small" color="secondary">
+                    Близкие получат все преимущества Альфа-Смарт бесплатно
+                  </Typography.Text>
                 </div>
               </div>
             </div>
@@ -223,7 +227,7 @@ export const App = () => {
             loading={loading}
             onClick={submit2}
           >
-            Подключить семейную
+            Перейти на семейную
           </ButtonMobile>
           <Gap size={16} />
           <ButtonMobile
